@@ -13,34 +13,17 @@
 
 **Introduction:**
 
-With the evolution of technologies in the last few decades, humans have reached the point where we can do everything at home. We can do all the thing that was once needed to be done only when we went outside. Of course, enjoying high quality music without going to the CD store is now also available on the go or right at where we live. However, most of the music people can find on the Internet nowadays would be either unauthorized copy or cheap quality music. Understanding the trend and the needs of people, our team wants to create a website so that customers can access it anywhere and anytime without worrying about the quality.
-
-**Objectives:**
-
-For many people , music and musical culture has become a way of life. For those who wish to establish their own music or enjoy the music of the social. Musik(tên website của mình) is an ideal solution. This gorgeous interface can help everyone connect to their favorite music as well as uploading their songs. Moreover followers can easily access each post via their smartphone or tables.
-
-Regarding to our Web-based System, our main focus is people who love music. To be more specific, our target market is the youth. Using this system, customers not only enjoy their favorite music, but also interact with people who have the same related song. Moreover, people can upload their own songs, albums or favorite playlists to share with the community.With High quality music, our purpose is providing to customers the best supportive tools when using the system.
+With the evolution of technologies in the last few decades, gaming industry has gone a long way. Humans have jumped from a few first games ever in the late 80s to a massive gaming library like nowadays. Large amount of games means it costs more to produce physical discs to sell. That is also the reason why many publishers have moved from discs to online codes. It is more efficiency and costs less. Understanding the trend and the needs of people, we have created a website that acts as an intermediate gateway to all the publishers. This webpages will allow people, especially gamers, to buy online key code across multiple publishers at the lowest price.
 
 **Main Function:**
 
 - **Function of the system:**
-  - Listen to one song
-  - Playlist
-  - Albums list
-  - Listen to all songs in the album
-  - List of playlist
-  - Personal playlist management
-  - Upload new songs/music videos (MV)
-  - Upload/Update artist&#39;s information
-  - Music bar
-  - Search songs/artist/album
-  - Song comments
-
-- **Administration Function:**
-  - Add/Delete songs
-  - Album management
-  - MV management
-  - Artist&#39;s information management
-  - Error report
-  - Lyric management
-  - User management
+  - Register an account
+  - Login/logout
+  - View games
+  - Buy games
+  - Search games
+  - Comment for the games
+  - See news of the company
+  - Contact to the company
+  - Edit user’s information
