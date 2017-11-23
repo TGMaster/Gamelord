@@ -1,8 +1,8 @@
-# Online Music Website
+# Gaming Ecommerce Website
 
 **Course:** Web Application Development
 
-**Project:** Online Music Website
+**Project:** Gaming Ecommerce Website
 
 **Members:**
 
