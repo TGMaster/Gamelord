@@ -1,14 +1,10 @@
-package vn.edu.hcmiu.scse.mypractice.news;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
+package function;
 
 import java.sql.*;
-import java.util.*;
-import com.mysql.jdbc.Driver;
 import java.io.InputStream;
 
 
@@ -16,7 +12,7 @@ import java.io.InputStream;
  *
  * @author Mitdacit
  */
-public class MySqlConnectionManager {
+public class Database {
  
     private String ip;
     private String port;
@@ -25,10 +21,10 @@ public class MySqlConnectionManager {
     private String password;
     private String connectionString;
     private Connection connection;
-    public MySqlConnectionManager() {
+    public Database() {
     }
 
-    public MySqlConnectionManager(String ip, String port, String database, String userName, String password) {
+    public Database(String ip, String port, String database, String userName, String password) {
         this.ip = ip;
         this.port = port;
         this.database = database;
@@ -39,7 +35,7 @@ public class MySqlConnectionManager {
 
     }
 
-    public MySqlConnectionManager(String userName, String password, String connectionString) {
+    public Database(String userName, String password, String connectionString) {
         this.userName = userName;
         this.password = password;
         this.connectionString = connectionString;

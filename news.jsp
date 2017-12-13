@@ -1,8 +1,6 @@
-
-
-
 <%@page import="java.util.ArrayList"%>
-<%@page import="vn.edu.hcmiu.scse.mypractice.news.news"%>
+<%@page import="function.*" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +32,7 @@
 <body>
 
     <%
-       ArrayList<news> ln = (ArrayList<news>) session.getAttribute("ln");
+       ArrayList<NewsDTO> ln = (ArrayList<NewsDTO>) session.getAttribute("ln");
     %>
 
 <div class="jumbotron">
@@ -54,8 +52,8 @@
       %>
       <div class="col-sm-4">
       <div class="panel panel-primary">
-          <div class="panel-heading">title <%=ln.get(i).getTitile()  %> </div>
-        <div class="panel-body"><img src="<%=ln.get(i).getIm()  %>" class="img-responsive" style="width:100%" alt="Image"></div>
+          <div class="panel-heading">title <%=ln.get(i).getTitle()  %> </div>
+        <div class="panel-body"><img src="<%=ln.get(i).getImage()  %>" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer"><%=ln.get(i).getDate()%></div>
         <form>
             <input type="hidden" name="gotonews" value="<%=i%>">

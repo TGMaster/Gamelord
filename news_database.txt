@@ -1,9 +1,0 @@
-CREATE TABLE `news` (
-  `idnews` int(11) NOT NULL,
-  `titlenews` varchar(45) NOT NULL,
-  `contentnews` longtext NOT NULL,
-  `datepost` date NOT NULL,
-  `author` varchar(45) NOT NULL,
-  `picture` blob NOT NULL,
-  PRIMARY KEY (`idnews`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8

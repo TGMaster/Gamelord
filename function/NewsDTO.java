@@ -1,70 +1,63 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package vn.edu.hcmiu.scse.mypractice.news;
+package function;
 
-import java.util.ArrayList;
-
-/**
- *
- * @author user
- */
 public class NewsDTO {
-    int idnews ;
-    String titile;
-    String content;
-    String author;
-    String date;
-    String im;
- 
-
+    
+    private int id;
+    private String title;
+    private String content;
+    private String date;
+    private String image;
+    
     public NewsDTO() {
-        this.idnews = -1;
-        this.titile="";
-        this.content="";
-        this.author="";
-        this.date = "";
-        this.im = "";
     }
 
-    public NewsDTO(int idnews, String titile, String content, String date , String author , String im) {
-        this.idnews = idnews;
-        this.titile = titile;
+    public NewsDTO(int id, String title, String content, String date, String image) {
+        this.id = id;
+        this.title = title;
         this.content = content;
-        
         this.date = date;
-        this.author = author;
-        this.im =im ;
+        this.image = image;
     }
 
-    public String getIm() {
-        return im;
+    public int getId() {
+        return id;
     }
 
-    
-    
-
-    public int getIdnews() {
-        return idnews;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTitile() {
-        return titile;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
         return content;
     }
 
-    public String getAuthor() {
-        return author;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getDate() {
         return date;
     }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     
 }
