@@ -56,8 +56,8 @@
         <div class="panel-body"><img src="<%=ln.get(i).getImage()  %>" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer"><%=ln.get(i).getDate()%></div>
         <form>
-            <input type="hidden" name="gotonews" value="<%=i%>">
-        <button type="submit" name="action" value="readmore" >read more </button> 
+            <input type="hidden" name="viewnews" value="<%=i%>">
+        <button type="submit" name="action" value="details" >Read more </button> 
         </form>
       </div>
     </div>

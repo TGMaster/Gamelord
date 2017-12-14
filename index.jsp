@@ -44,7 +44,7 @@
 
         </div>
 
-
+        <header>
         <!-- Top Navigation -->
         <nav class="navbar navbar-toggleable-md mb-4 top-bar navbar-static-top sps sps--abv">
             <div class="container">
@@ -56,14 +56,14 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active"> <a class="nav-link" href="#myCarousel"><strong>HOME</strong> <span class="sr-only">(current)</span></a> </li>
                         <li class="nav-item"> <a class="nav-link" href="#benefits"><strong>STORE</strong></a> </li>
-                        <li class="nav-item"> <a class="nav-link" href="#about"><strong>NEWS</strong></a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="/news"><strong>NEWS</strong></a> </li>
                         <li class="nav-item"> <a class="nav-link" href="#blog"><strong>GALLERY</strong></a> </li>
                         <li class="nav-item"> <a class="nav-link" href="#contact"><strong>CONTACT</strong></a> </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
+        </header>
 
         <!-- Swiper Silder
           ================================================== --> 
@@ -98,13 +98,13 @@
 
                         ArrayList<NewsDTO> listOfNews = abc.getNews(3);
 
-                        for (NewsDTO news : listOfNews) {
+                        for (int i = 0; i < listOfNews.size(); i++) {
                     %>
 
                     <div class="col-md-4 blog-box" data-aos="fade-down">
-                        <div class="blog-image-block"> <img src="<%=news.getImage()%>" alt="" class="img-fluid"> </div>
-                        <h3 class="blog-title"><a href="#"><%=news.getTitle()%></a></h3>
-                        <p class="blog-content"><%=news.getContent()%></p>
+                        <div class="blog-image-block"> <img src="<%=listOfNews.get(i).getImage()%>" alt="" class="img-fluid"> </div>
+                        <h3 class="blog-title"><a href="/news?viewnews=<%=i%>&action=details"><%=listOfNews.get(i).getTitle()%></a></h3>
+                        <p class="blog-content"><%=listOfNews.get(i).getContent()%></p>
                     </div>
                     <% }%>
                     <!--End loop-->
@@ -200,14 +200,14 @@
                     </div>
                     <div class="col-md-2 col-sm-4">
                         <ul>
-                            <li><a href="#">Home</a></li>
+                            <li><a href="/index.jsp">Home</a></li>
                             <li><a href="#">Store</a></li>
                             <li><a href="#">About</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2 col-sm-4">
                         <ul>
-                            <li><a href="#">News</a></li>
+                            <li><a href="/news">News</a></li>
                             <li><a href="#">Gallery</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>

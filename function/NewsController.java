@@ -43,34 +43,75 @@ public class NewsController extends HttpServlet {
         RequestDispatcher rd;
 
         String action = request.getParameter("action");
-
         session.setAttribute("ln", ln);
+        
+        // Show news page
         if (action == null) {
             rd = sc.getRequestDispatcher("/news.jsp");
             rd.forward(request, response);
-        } else if (action.equals("readmore")) {
-            String idd = request.getParameter("gotonews");
+            
+            
+            // Read more function
+        } else if (action.equals("details")) {
+            String idd = request.getParameter("viewnews");
             int id = Integer.parseInt(idd);
             NewsDTO news = ln.get(id);
             session.setAttribute("news", news);
             rd = sc.getRequestDispatcher("/newsdetail.jsp");
             rd.forward(request, response);
-        } else if (action.equals("addnews")) {
             
+            // Add news function
+        } else if (action.equals("addnews")) {
+            // Input title and content with replace superscript
             String tit = request.getParameter("tit");
-            String title = tit.replace("\'", "\\\'");
+            String title = convertSup(tit);
             String con = request.getParameter("con");
-            String content = con.replace("\'", "\\\'");
+            String content = convertSup(con);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            // Format Date
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
             Date today = new Date();
             String date = sdf.format(today);
 
+            // Input image
             String im = request.getParameter("image");
+            
+            // Add to database
             connector.addNews(title, content, date, im);
             response.sendRedirect("/news");
         }
 
+    }
+
+    private String convertSup(String word) {
+        StringBuilder sb = new StringBuilder();
+        
+        char[] charArray = word.toLowerCase().toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            // Single character case
+            switch (charArray[i]) {
+                // Apostrophe
+                case '\'':
+                    sb.append("\\\'");
+                    break;
+                // Trademark
+                case '™':
+                    sb.append("&trade;");
+                    break;
+                // Register
+                case '®':
+                    sb.append("&reg;");
+                    break;
+                // Copyright
+                case '©':
+                    sb.append("&copy;");
+                    break;
+                default:
+                    sb.append(word.charAt(i));
+                    break;
+            }
+        }
+        return sb.toString();
     }
 
     @Override

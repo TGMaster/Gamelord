@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="con">Content: </label>
                     <div class="col-sm-10">          
-                        <input type="text" class="form-control" id="con" placeholder="Enter content" name="con" required> </textarea>
+                        <textarea value="" class="form-control" id="con" placeholder="Enter content" name="con" required> </textarea>
 
                     </div>
                 </div>
