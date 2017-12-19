@@ -39,11 +39,11 @@
 <div class="container-fluid">
   <div class="row content">
    
-     <jsp:useBean id="news" scope="application" class="function.NewsDTO" />
+    <jsp:useBean id="news" scope="application" class="function.NewsDTO" />
     <div class="col-sm-9">
       <h4 align="center"><small>><</small></h4>
       <hr>
-      <h2> <jsp:getProperty name="news" property="title" /></h2>
+      <h2><jsp:getProperty name="news" property="title" /></h2>
       <h5><jsp:getProperty name="news" property="date" />.</h5>
       <h5><button type="submit" class="label label-danger" >dislike</button>  <button type="submit"   class="label label-primary" >Like</button></h5><br>
       <p><jsp:getProperty name="news" property="content" /></p>
