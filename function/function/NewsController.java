@@ -6,7 +6,6 @@ package function;
  * and open the template in the editor.
  */
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,8 +25,6 @@ public class NewsController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
 
         NewsDAO connector = new NewsDAO();
 
@@ -42,43 +39,41 @@ public class NewsController extends HttpServlet {
         // Declare requestDispatcher
         RequestDispatcher rd;
 
+        // Get action
         String action = request.getParameter("action");
-        session.setAttribute("ln", ln);
         
         // Show news page
-        if (action == null) {
+        if (null == action) { 
             rd = sc.getRequestDispatcher("/news.jsp");
             rd.forward(request, response);
+        } 
+        else switch (action) {
             
-            
-            // Read more function
-        } else if (action.equals("details")) {
-            String idd = request.getParameter("viewnews");
-            int id = Integer.parseInt(idd);
-            NewsDTO news = ln.get(id);
-            session.setAttribute("news", news);
-            rd = sc.getRequestDispatcher("/newsdetail.jsp");
-            rd.forward(request, response);
-            
-            // Add news function
-        } else if (action.equals("addnews")) {
-            // Input title and content with replace superscript
-            String tit = request.getParameter("tit");
-            String title = convertSup(tit);
-            String con = request.getParameter("con");
-            String content = convertSup(con);
-
-            // Format Date
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-            Date today = new Date();
-            String date = sdf.format(today);
-
-            // Input image
-            String im = request.getParameter("image");
-            
-            // Add to database
-            connector.addNews(title, content, date, im);
-            response.sendRedirect("/news");
+            case "details": // Read more function
+                String idd = request.getParameter("viewnews");
+                int id = Integer.parseInt(idd);
+                NewsDTO news = ln.get(id);
+                session.setAttribute("news", news);
+                rd = sc.getRequestDispatcher("/newsdetail.jsp");
+                rd.forward(request, response);
+                break;
+                
+            case "addnews": // Add news function
+                // Input title and content with replace superscript
+                String tit = request.getParameter("tit");
+                String title = convertSup(tit);
+                String con = request.getParameter("con");
+                String content = convertSup(con);
+                // Format Date
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date today = new Date();
+                String date = sdf.format(today);
+                // Input image
+                String im = request.getParameter("image");
+                // Add to database
+                connector.addNews(title, content, date, im);
+                response.sendRedirect("/news");
+                break;
         }
 
     }
