@@ -6,7 +6,7 @@
     <body>
         <header>
             <!-- Top Navigation -->
-            <nav class="navbar navbar-toggleable-md mb-4 top-bar navbar-static-top sps sps--blw">
+            <nav class="navbar navbar-toggleable-md mb-4 top-bar navbar-static-top menu">
                 <div class="container">
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse1" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>

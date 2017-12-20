@@ -90,19 +90,25 @@
 
                     <!--Start loop to show news-->
                     <%
-                        NewsDAO abc = new NewsDAO();
-                        ArrayList<NewsDTO> listOfNews = abc.getNews(3);
+                        ProductDAO product = new ProductDAO();
+                        NewsDAO newz = new NewsDAO();
+                        ArrayList<ProductDA> listOfProduct = product.getProduct(3);
+                        ArrayList<NewsDTO> listOfNews = newz.getNews(3);
                         for (int i = 0; i < listOfNews.size(); i++) {
                             String content = listOfNews.get(i).getContent();
                             if (content.contains("<br>")) {
                                 String[] temp = content.split("<br>");
                                 content = temp[0] + " ...";
                             }
+                            String img = listOfNews.get(i).getImage();
+                            if (img == null) {
+                                img =
+                            }
 
                     %>
 
                     <div class="col-md-4 blog-box" data-aos="fade-down">
-                        <div class="blog-image-block"> <img src="<%=listOfNews.get(i).getImage()%>" alt="" class="img-fluid"> </div>
+                        <div class="blog-image-block"> <img src="<%=%>" alt="" class="img-fluid"> </div>
                         <h3 class="blog-title"><a href="/news?viewnews=<%=i%>&action=details"><%=listOfNews.get(i).getTitle()%></a></h3>
                         <p class="blog-content"><%=content%></p>
                     </div>

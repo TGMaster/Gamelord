@@ -1,6 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="function.*" %>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -88,8 +88,6 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="js/jquery.min.js" ></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/scrollPosStyler.js"></script>
-        <script src="js/swiper.min.js"></script>
         <script src="js/isotope.min.js"></script>
         <script src="js/nivo-lightbox.min.js"></script>
         <script src="js/wow.min.js"></script>

@@ -1,74 +1,73 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>news details</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {height: 1500px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height: auto;} 
-    }
-  </style>
-</head>
-<body>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <link rel="icon" href=" ">
+        <title>Gamelord News Page | Game Developer Company</title>
 
-<div class="container-fluid">
-  <div class="row content">
-   
-    <jsp:useBean id="news" scope="application" class="function.NewsDTO" />
-    <div class="col-sm-9">
-      <h4 align="center"><small>><</small></h4>
-      <hr>
-      <h2><jsp:getProperty name="news" property="title" /></h2>
-      <h5><jsp:getProperty name="news" property="date" />.</h5>
-      <h5><button type="submit" class="label label-danger" >dislike</button>  <button type="submit"   class="label label-primary" >Like</button></h5><br>
-      <p><jsp:getProperty name="news" property="content" /></p>
-    
-      <br><br>
-   
-      
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/custom.css" rel="stylesheet">
 
-      <h4>Leave a Comment:</h4>
-      <form role="form">
-        <div class="form-group">
-          <textarea class="form-control" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">Submit</button>
-      </form>
-      <br><br>
-      
-   
-    </div>
-  </div>
-</div>
+        <!-- Helper Styles -->
+        <link href="css/loaders.css" rel="stylesheet">
+        <link href="css/swiper.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/nivo-lightbox.css">
+        <link rel="stylesheet" href="css/nivo_themes/default/default.css">
 
-<footer class="container-fluid">
-  <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-</footer>
+        <!-- Font Awesome Style Icon -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- Use JavaBean to get information-->
+        <jsp:useBean id="news" scope="application" class="function.NewsDTO"/>
 
-</body>
+        <!-- Header
+         ================================================== -->
+        <jsp:include page="header.jsp"/>
+
+        <section class="about-sec parallax-section" id="about">
+            <div class="container">
+                <center><div class="row">
+                    <div class="col-md-10">
+                        <h2><jsp:getProperty name="news" property="title"/></h2>
+                        <h4 style="text-align: right"><small><jsp:getProperty name="news" property="date"/></small></h4>
+                    </div>
+                </div></center>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="<jsp:getProperty name="news" property="image"/>" class="img-fluid"/>
+                    </div>
+                    <div class="col-md-4">
+                        <p style="text-align: left"><jsp:getProperty name="news" property="content"/></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Footer
+         ================================================== -->
+        <jsp:include page="footer.jsp"/>
+
+
+        <!-- Bootstrap core JavaScript
+          ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/jquery.min.js" ></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/isotope.min.js"></script>
+        <script src="js/nivo-lightbox.min.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/core.js"></script>
+
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
 </html>

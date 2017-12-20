@@ -26,8 +26,8 @@
                     </div>
                 </div>
                 <div class="row copy-footer">
-                    <div class="col-sm-6 col-md-3"> &copy;<script type="text/javascript">document.write(new Date().getFullYear());</script> Gamelost.co </div>
-                    <div class="col-sm-6 col-md-4 pull-right text-xs-right">Designed by TGMaster</div>
+                    <div class="col-sm-6 col-md-3"> &copy;<script type="text/javascript">document.write(new Date().getFullYear());</script> Gamelord.co </div>
+                    <div class="col-sm-6 col-md-4 pull-right text-xs-right">Designed by TG</div>
                 </div>
             </div>
         </footer>
