@@ -1,0 +1,18 @@
+﻿INSERT INTO `category` (`category_id`, `category_name`) VALUES
+(1, 'Action'),
+(2, 'Adventure'),
+(3, 'Racing');
+
+
+INSERT INTO `product` (`product_id`, `category_id`, `product_name`, `product_image`, `product_price`, `product_description`) VALUES
+(1, 1, 'Mafia', 'img/mafia.jpg', 2, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'),
+(2, 1, 'Tomb Rider', 'img/tomb.jpg', 3, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'),
+(3, 1, 'Diablo 3', 'img/Diablo3.jpg', 4, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'),
+(4, 1, 'crysis', 'img/crysis.jpg', 5, 'aa'),
+(5, 1, 'DarkSoul', 'img/darksoul.jpg', 7, 'Darksoul'),
+(6, 1, 'Dynasit Warrior 8', 'img/dynasit.jpg', 1, 'Warrior'),
+(7, 1, 'Evil Within', 'img/evil.jpg', 6, 'scary'),
+(8, 1, 'Hitman', 'img/hitman.jpg', 3, 'hitman'),
+(9, 2, 'Payday 2', 'img/payday.jpg', 7, 'mmm'),
+(10, 2, 'Pes 2016', 'img/pes.jpg', 3, 'PES barged itself back into the discussion last year, standing shoulder-to-shoulder with FIFA as a genuine contender for the year’s best footie game. Konami delivered a huge overhaul that delighted long-standing fans who waited years for the series’ return to form. PES 2018 continues the developers push to win back fans, but sadly offers small steps rather than giant leaps in gameplay. As a result, while the football on the pitch is sublime, elements off it remain in dire need of fixing.'),
+(11, 2, 'Fuse', 'img/fuse.jpg', 4, 'aa');
