@@ -82,26 +82,11 @@
         
     %>
 
-        <header>
-        <!-- Top Navigation -->
-        <nav class="navbar navbar-toggleable-md mb-4 top-bar navbar-static-top sps sps--abv">
-            <div class="container">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse1" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand mx-auto logo" href="#">GAME<span>LOST</span></a>
-                <div class="collapse navbar-collapse" id="navbarCollapse1">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"> <a class="nav-link" href="#myCarousel"><strong>HOME</strong> <span class="sr-only">(current)</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link" href="#benefits"><strong>STORE</strong></a> </li>
-                        <li class="nav-item"> <a class="nav-link" href="/news"><strong>NEWS</strong></a> </li>
-                        <li class="nav-item"> <a class="nav-link" href="#blog"><strong>GALLERY</strong></a> </li>
-                        <li class="nav-item"> <a class="nav-link" href="#contact"><strong>CONTACT</strong></a> </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        </header>
+        <jsp:include page="header.jsp"></jsp:include>
+
+        
+
+        
 	
 	<section id="advertisement">
 		<div class="container">
@@ -242,32 +227,6 @@ $('select').prettyDropdown();
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
     
-    <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-4">
-                        <a class="logo">GAMELOST</a>
-                    </div>
-                    <div class="col-md-2 col-sm-4">
-                        <ul>
-                            <li><a href="/index.jsp">Home</a></li>
-                            <li><a href="#">Store</a></li>
-                            <li><a href="#">About</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-4">
-                        <ul>
-                            <li><a href="/news">News</a></li>
-                            <li><a href="#">Gallery</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row copy-footer">
-                    <div class="col-sm-6 col-md-3"> &copy;<script type="text/javascript">document.write(new Date().getFullYear());</script> Gamelost.co </div>
-                    <div class="col-sm-6 col-md-4 pull-right text-xs-right">Designed by TGMaster</div>
-                </div>
-            </div>
-        </footer>
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
