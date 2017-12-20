@@ -3,11 +3,13 @@
     -- ----------------------------
     CREATE TABLE IF NOT EXISTS `news`(
     	`news_id` BIGINT(11) NOT NULL AUTO_INCREMENT,
+    	`product_id` BIGINT(20) DEFAULT NULL,
     	`news_title` VARCHAR(128) NOT NULL,
     	`news_content` LONGTEXT NOT NULL,
     	`news_date` DATE NOT NULL,
     	`news_image` VARCHAR(64) NOT NULL,
-    	PRIMARY KEY(`news_id`)
+    	PRIMARY KEY(`news_id`),
+		FOREIGN KEY (product_id) REFERENCES product(product_id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;
 -- --------------------------------------------------------
 -- ----------------------------
@@ -20,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `category`(
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;
 -- --------------------------------------------------------
 -- ----------------------------
--- Table structure for category
+-- Table structure for product
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS `product`(
 	`product_id` BIGINT(20) NOT NULL AUTO_INCREMENT,
@@ -30,7 +32,8 @@ CREATE TABLE IF NOT EXISTS `product`(
 	`product_price` DOUBLE DEFAULT NULL,
 	`product_description` LONGTEXT COLLATE utf8_unicode_ci,
 	`product_discount` BIGINT(11) DEFAULT NULL,
-	PRIMARY KEY(`product_id`)
+	PRIMARY KEY(`product_id`),
+	FOREIGN KEY (category_id) REFERENCES category(category_id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci;
 -- --------------------------------------------------------
 -- ----------------------------
