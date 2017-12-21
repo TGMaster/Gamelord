@@ -122,6 +122,23 @@ section {
 	position: absolute;
 	right: 21px;
 }
+.menu {
+	padding: 1em .5em;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #fff;
+	color: #fff;
+}
+.menu.top-bar a.navbar-brand {
+	color: #000;
+}
+.menu.top-bar .nav-link:hover, .sps--blw.top-bar .nav-item.active a {
+	color: #0297ff;
+	border-bottom: none;
+	border-radius: 0;
+}
 .sps {
 	padding: 1em .5em;
 	position: fixed;
