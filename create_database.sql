@@ -9,7 +9,7 @@
     	`news_date` DATE NOT NULL,
     	`news_image` VARCHAR(64) NOT NULL,
     	PRIMARY KEY(`news_id`),
-		FOREIGN KEY (product_id) REFERENCES product(product_id)
+	FOREIGN KEY (product_id) REFERENCES product(product_id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;
 -- --------------------------------------------------------
 -- ----------------------------
