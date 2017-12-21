@@ -134,7 +134,7 @@ section {
 .menu.top-bar a.navbar-brand {
 	color: #000;
 }
-.menu.top-bar .nav-link:hover, .sps--blw.top-bar .nav-item.active a {
+.menu.top-bar .nav-link:hover, .menu.top-bar .nav-item.active a {
 	color: #0297ff;
 	border-bottom: none;
 	border-radius: 0;
