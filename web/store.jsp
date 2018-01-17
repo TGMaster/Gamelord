@@ -64,6 +64,10 @@
                 user = (User) session.getAttribute("user");
             }
 
+            String message;
+            if (request.getAttribute("message") != null) {
+                message = (String) request.getAttribute("message");
+            }
         %>
         <header>
             <!-- Top Navigation -->
@@ -78,7 +82,9 @@
                             <li class="nav-item"> <a class="nav-link" href="/index.jsp"><strong>HOME</strong></a> </li>
                             <li class="nav-item active"> <a class="nav-link" href="/store"><strong>STORE</strong> <span class="sr-only">(current)</span></a> </li>
                             <li class="nav-item"> <a class="nav-link" href="/news"><strong>NEWS</strong></a> </li>
-                            <li class="nav-item"> <a class="nav-link" href="/about.html"><strong>ABOUT</strong></a> </li>
+                                <%if (user != null && user.isAdmin()) {%>
+                            <li class="nav-item"> <a class="nav-link" href="/editProduct.jsp"><strong>SETTINGS</strong></a> </li>
+                                <%}%>
                             <li class="nav-item"> <a class="nav-link" href="/contact"><strong>CONTACT</strong></a> </li>
                                 <%if (user != null) {%>
                             <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i> <span class="badge"><%=cart.countItem()%></span></a>
@@ -97,12 +103,13 @@
                                         </div>
                                     </li>
                                     <li class="divider"></li>
+
                                     <ul class ="shopping_cart-items">
 
                                         <%for (Map.Entry<Integer, Item> list : cart.getCartItems().entrySet()) {%>
                                         <li class="clearfix">
                                             <div class="col-md-3 float-left">
-                                                <img src="<%=list.getValue().getProduct().getImage()%>" alt="item<%=list.getKey()%>" style="max-width: 100%;height: auto;" />
+                                                <img src="img/products/<%=list.getValue().getProduct().getImage()%>" alt="item<%=list.getKey()%>" style="max-width: 100%;height: auto;" />
                                             </div>
                                             <div class="col-md-9 float-right">
                                                 <span class="item-name"><a href="store?action=view&productID=<%=list.getValue().getProduct().getPid()%>"><%=list.getValue().getProduct().getName()%></a></span>
@@ -193,7 +200,6 @@
                                     %>
                                     <option value="<%=c.getId()%>"><%=c.getName()%></option>
                                     <%}%>
-                                    <option value="0">All Genres</option>
                                 </optgroup>
                             </select>
                         </div>
@@ -212,15 +218,13 @@
 
                 <div class="row">
                     <%
-
-                        if (listOfProduct.size()
-                                > 0) {
+                        if (listOfProduct.size() > 0) {
                             for (Product p : listOfProduct) {
                     %>
                     <div class="block">
 
                         <div class="top">
-                            <img src="<%=p.getImage()%>" alt="pic" />
+                            <img src="img/products/<%=p.getImage()%>" alt="pic" />
                             <a href="store?action=view&productID=<%=p.getPid()%>" class="heading converse"><%=p.getName()%></a>
                         </div>
 
@@ -248,8 +252,7 @@
 
                 <div class="row">
                     <ul class="pagination">
-                        <%for (int i = 1;
-                                    i <= (total / 6) + 1; i++) {%>
+                        <%for (int i = 1; i <= (total / 6) + 1; i++) {%>
                         <li class="arrow"><a href="/store?pages=<%=i%>"><%=i%></a></li>
                             <%}%>
                     </ul>
@@ -293,23 +296,23 @@
                             <tbody>
                                 <tr>
                                     <th></th>
-                                    <th>Item</th>
-                                    <th>QTY</th>
-                                    <th>Price</th>
-                                    <th>Total Price</th>
+                                    <th style="text-align:center">Item</th>
+                                    <th style="text-align:center">QTY</th>
+                                    <th style="text-align:center">Price</th>
+                                    <th style="text-align:center">Total Price</th>
                                 </tr>
                                 <%for (Map.Entry<Integer, Item> list : cart.getCartItems().entrySet()) {%>
                                 <tr>
                                     <td align="center"><a href="store?action=remove&productID=<%=list.getValue().getProduct().getPid()%>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                     <td><%=list.getValue().getProduct().getName()%></td>
-                                    <td><%=list.getValue().getQuantity()%></td>
-                                    <td>£<%=list.getValue().getProduct().getPrice()%></td>
-                                    <td>£<%=list.getValue().getProduct().getPrice() * list.getValue().getQuantity()%></td>
+                                    <td style="text-align:right"><%=list.getValue().getQuantity()%></td>
+                                    <td style="text-align:right">£<%=list.getValue().getProduct().getPrice()%></td>
+                                    <td style="text-align:right">£<%=list.getValue().getProduct().getPrice() * list.getValue().getQuantity()%></td>
                                 </tr>
                                 <%}%>
                                 <tr>
                                     <th colspan="4"><span class="float-right">Total</span></th>
-                                    <th>£<%=cart.totalCart()%></th>
+                                    <th style="text-align:right">£<%=cart.totalCart()%></th>
                                 </tr>
                             </tbody>
                         </table>
@@ -343,36 +346,36 @@
         <script src="js/effects.js"></script>
 
         <script type = "text/javascript">
-            window._sbzq || function (e) {
-                e._sbzq = [];
-                var t = e._sbzq;
-                t.push(["_setAccount", 75192]);
-                var n = e.location.protocol === "https:" ? "https:" : "http:";
-                var r = document.createElement("script");
-                r.type = "text/javascript";
-                r.async = true;
-                r.src = n + "//static.subiz.com/public/js/loader.js";
-                var i = document.getElementsByTagName("script")[0];
-                i.parentNode.insertBefore(r, i);
-            }(window);
+                                window._sbzq || function (e) {
+                                    e._sbzq = [];
+                                    var t = e._sbzq;
+                                    t.push(["_setAccount", 75192]);
+                                    var n = e.location.protocol === "https:" ? "https:" : "http:";
+                                    var r = document.createElement("script");
+                                    r.type = "text/javascript";
+                                    r.async = true;
+                                    r.src = n + "//static.subiz.com/public/js/loader.js";
+                                    var i = document.getElementsByTagName("script")[0];
+                                    i.parentNode.insertBefore(r, i);
+                                }(window);
 
-            $(document).ready(function () {
+                                $(document).ready(function () {
 
-                $(".dropdown").hover(
-                        function () {
-                            $(".dropdown-menu", this).stop().slideDown();
-                        },
-                        function () {
-                            $(".dropdown-menu", this).stop().slideUp();
-                        }
-                );
+                                    $(".dropdown").hover(
+                                            function () {
+                                                $(".dropdown-menu", this).stop().slideDown();
+                                            },
+                                            function () {
+                                                $(".dropdown-menu", this).stop().slideUp();
+                                            }
+                                    );
 
             <%if (request.getAttribute("remove-modal") != null) { %>
 
-                $('#checkout-modal').modal('show');
+                                    $('#checkout-modal').modal('show');
 
             <%}%>
-            });
+                                });
 
         </script>
     </body>

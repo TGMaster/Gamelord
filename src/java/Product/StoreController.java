@@ -31,6 +31,7 @@ public class StoreController extends HttpServlet {
     // Connect to database
     private final ProductDAO productDAO = new ProductDAO();
     private final CategoryDAO categoryDAO = new CategoryDAO();
+    private final UserDAO userDAO = new UserDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,6 +56,20 @@ public class StoreController extends HttpServlet {
         String action = request.getParameter("action");
 
         int pages = 1, firstResult, maxResult, total;
+
+        User u = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("username")) {
+                    u = userDAO.login(cookie.getValue());
+                }
+            }
+        }
+        
+        if (session.getAttribute("user") != null) {
+            u = (User) session.getAttribute("user");
+        }
 
         // Index page
         if (action == null) {
@@ -122,14 +137,12 @@ public class StoreController extends HttpServlet {
                 case "search": {
                     int category = (Integer) Integer.parseInt(request.getParameter("category"));
                     String search = request.getParameter("searchProduct");
-                    if (category == 0) {
-                        response.sendRedirect("/store");
-                    } else {
-                        List<Product> searchList = productDAO.searchProduct(search, category);
-                        session.setAttribute("listOfProduct", searchList);
-                        rd = sc.getRequestDispatcher("/store.jsp");
-                        rd.forward(request, response);
-                    }
+
+                    List<Product> searchList = productDAO.searchProduct(search, category);
+                    session.setAttribute("listOfProduct", searchList);
+
+                    rd = sc.getRequestDispatcher("/store.jsp");
+                    rd.forward(request, response);
 
                     break;
                 }
@@ -140,6 +153,8 @@ public class StoreController extends HttpServlet {
                     if (!request.getParameter("productID").equals("")) {
                         productID = (Integer) Integer.parseInt(request.getParameter("productID"));
                     }
+                    session.setAttribute("user", u);
+                    session.setAttribute("cart", cart);
                     Product product = productDAO.getProduct(productID);
                     session.setAttribute("product", product);
                     rd = sc.getRequestDispatcher("/product.jsp");
@@ -149,7 +164,7 @@ public class StoreController extends HttpServlet {
 
                 // Delete Product
                 case "delete": {
-                    int id = Integer.parseInt(request.getParameter("delete"));
+                    int id = Integer.parseInt(request.getParameter("productID"));
                     productDAO.remove(id);
                     total = productDAO.countProduct();
                     if (total <= 6) {
@@ -161,7 +176,7 @@ public class StoreController extends HttpServlet {
                     }
                     List<Product> listAll = productDAO.getAllProducts(firstResult, maxResult);
                     session.setAttribute("listOfProduct", listAll);
-                    response.sendRedirect("/editproduct.jsp");
+                    response.sendRedirect("/editProduct.jsp");
 
                     break;
                 }
@@ -195,7 +210,7 @@ public class StoreController extends HttpServlet {
                     }
                     String imagename = EditProfile.extractFileName(part);
                     if (imagename != null && imagename.length() > 0) {
-                        String filePath = fullSavePath + File.separator + "news" + File.separator + imagename;
+                        String filePath = fullSavePath + File.separator + "products" + File.separator + imagename;
                         System.out.println("Write attachment to file: " + filePath);
 
                         // Store
@@ -203,7 +218,7 @@ public class StoreController extends HttpServlet {
                     }       // Create Product key
 
                     String key = randomString() + "-" + randomString() + "-" + randomString();
-                    
+
                     // Create product
                     Product p = new Product();
                     p.setCid(category);
@@ -224,7 +239,7 @@ public class StoreController extends HttpServlet {
                     }
                     List<Product> listAll = productDAO.getAllProducts(firstResult, maxResult);
                     session.setAttribute("listOfProduct", listAll);
-                    response.sendRedirect("/editproduct.jsp");
+                    response.sendRedirect("/editProduct.jsp");
                     break;
                 }
             }

@@ -140,7 +140,6 @@
                             <input type="hidden" name="viewnews" value="<%=n.getId()%>">
                             <button type="submit" class="btn btn-info" name="action" value="details">Read more</button>
                         </form>
-                        </p>
                     </div>
                     <% }%>
                     <!--End loop-->

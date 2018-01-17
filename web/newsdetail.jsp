@@ -1,3 +1,4 @@
+<%@page import="News.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +25,12 @@
         <link rel="stylesheet" href="css/font-awesome.min.css">
     </head>
     <body>
+
+
         <!-- Use JavaBean to get information-->
-        <jsp:useBean id="news" scope="application" class="News.News"/>
+        <%
+            News n = (News) session.getAttribute("news");
+        %>
 
         <!-- Header
          ================================================== -->
@@ -50,22 +55,37 @@
             </nav>
         </header>
 
+        <section class="service-sec">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading text-md-center text-xs-center">
+                        <h2>NEWS</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="about-sec parallax-section">
             <div class="container">
+
                 <center><div class="row">
                         <div class="col-md-10">
-                            <h2><jsp:getProperty name="news" property="title"/></h2>
-                            <h4 style="text-align: right"><small><jsp:getProperty name="news" property="date"/></small></h4>
+                            <h2><%=n.getTitle()%></h2>
+                            <h4 style="text-align: right"><small><%=n.getDate()%></small></h4>
                         </div>
                     </div></center>
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="<jsp:getProperty name="news" property="image"/>" class="img-fluid"/>
+                        <img src="<%=n.getImage()%>" class="img-fluid"/>
                     </div>
                     <div class="col-md-4">
-                        <p style="text-align: left"><jsp:getProperty name="news" property="content"/></p>
+                        <p style="text-align: left"><%=n.getContent()%></p>
                     </div>
                 </div>
+            </div>
+
+            <div class="container">
+                <div class="fb-comments" data-href="http://localhost:8080/news?action=details&viewnews=<%=n.getId()%>" data-numposts="5"></div>
             </div>
         </section>
 
@@ -87,7 +107,15 @@
         <script src="js/core.js"></script>
 
 
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+        <div id="fb-root"></div>
+        <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=351542721934248';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
     </body>
 </html>

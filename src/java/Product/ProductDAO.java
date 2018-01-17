@@ -130,13 +130,17 @@ public class ProductDAO {
 
         try {
             PreparedStatement ps;
-            if (!productName.equals("") && category_id != 0) {
+            if (!productName.equals("") && category_id > 0) {
                 query = "SELECT * FROM product WHERE product_name LIKE ? "
                         + "AND category_id = ?";
                 ps = connection.prepareCall(query);
                 ps.setString(1, "%" + productName + "%");
                 ps.setInt(2, category_id);
 
+            } else if (category_id == 0 && productName.equals("")) {
+                query = "SELECT * FROM product";
+                ps = connection.prepareCall(query);
+                
             } else {
                 if (productName.equals("")) {
                     query = "SELECT * FROM product WHERE category_id = ?";

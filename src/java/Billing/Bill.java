@@ -5,8 +5,6 @@
  */
 package Billing;
 
-import java.sql.Timestamp;
-
 /**
  *
  * @author TGMaster
@@ -15,7 +13,7 @@ public class Bill {
 
     private long id;
     private int Uid;
-    private Timestamp date;
+    private String date;
     private String payment;
     private String address;
     private double total;
@@ -23,7 +21,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(long id, int Uid, Timestamp date, String payment, String address,double total) {
+    public Bill(long id, int Uid, String date, String payment, String address,double total) {
         this.id = id;
         this.Uid = Uid;
         this.date = date;
@@ -48,11 +46,11 @@ public class Bill {
         this.Uid = Uid;
     }
 
-    public Timestamp getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

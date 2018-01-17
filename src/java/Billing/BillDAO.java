@@ -27,7 +27,7 @@ public class BillDAO {
         try {
             ps = (PreparedStatement) connection.prepareStatement(query);
             ps.setInt(1, b.getUid());
-            ps.setTimestamp(2, b.getDate());
+            ps.setString(2, b.getDate());
             ps.setDouble(3, b.getTotal());
             ps.setString(4, b.getPayment());
             ps.setString(5, b.getAddress());
@@ -61,7 +61,7 @@ public class BillDAO {
 
                 bill.setId(rs.getInt("bill_id"));
                 bill.setUid(rs.getInt("user_id"));
-                bill.setDate(rs.getTimestamp("bill_date"));
+                bill.setDate(rs.getString("bill_date"));
                 bill.setTotal(rs.getDouble("bill_total"));
                 bill.setPayment(rs.getString("bill_payment"));
                 bill.setAddress(rs.getString("bill_address"));

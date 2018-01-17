@@ -1,4 +1,10 @@
-<%@page import="java.util.*, News.*, Category.*"%>
+<%-- 
+    Document   : editProduct
+    Created on : Jan 10, 2018, 7:58:43 PM
+    Author     : TGMaster
+--%>
+
+<%@page import="java.util.*, Product.*, Category.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
@@ -10,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <link rel="icon" href=" ">
-        <title>Gamelord News Settings | Game Developer Company</title>
+        <title>Gamelord Products Settings | Game Developer Company</title>
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,6 +33,27 @@
 
         <!-- Font Awesome Style Icon -->
         <link rel="stylesheet" href="css/font-awesome.min.css">
+
+        <style>
+            .price {
+                color: #419641;
+                font-weight: bold;
+                text-align: center;
+            }
+            .info {
+                font-size: 14px;
+                color: #969696;
+                margin-bottom: 10px;
+                text-align: justify;
+            }
+            .blog-title {
+                text-align: center;
+            }
+            .blog-image-block img {
+                margin: 0 auto;
+                padding-left: 12%;
+            }
+        </style>
     </head>
     <body>
         <!-- Header
@@ -42,10 +69,11 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse1">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item"> <a class="nav-link" href="/index.jsp"><strong>HOME</strong></a> </li>
-                            <li class="nav-item"> <a class="nav-link" href="/store"><strong>STORE</strong></a> </li>
-                            <li class="nav-item active"> <a class="nav-link" href="/news"><strong>NEWS</strong> <span class="sr-only">(current)</span></a> </li>
+                            <li class="nav-item active"> <a class="nav-link" href="/store"><strong>STORE</strong> <span class="sr-only">(current)</span></a> </li>
+                            <li class="nav-item"> <a class="nav-link" href="/news"><strong>NEWS</strong> </a> </li>
                             <li class="nav-item"> <a class="nav-link" href="/about.html"><strong>ABOUT</strong></a> </li>
                             <li class="nav-item"> <a class="nav-link" href="/contact"><strong>CONTACT</strong></a> </li>
+                            <li class="nav-item"> <a class="nav-link" href="/logout"><strong>LOGOUT</strong></a> </li>
                         </ul>
                     </div>
                 </div>
@@ -59,37 +87,40 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="heading text-md-center text-xs-center">
-                            <h2>NEWS SETTINGS</h2>
+                            <h2>PRODUCTS SETTINGS</h2>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <form action="news" method="POST" name="form" id="form" accept-charset="UTF-8">
+                    <form action="store" method="POST" name="form" id="form" accept-charset="UTF-8" enctype="multipart/form-data">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="col-md-3 text-center vcenter">Title</th>
-                                    <th class="col-md-5 text-center vcenter">Content</th>
+                                    <th class="col-md-2 text-center vcenter">Name</th>
+                                    <th class="col-md-3 text-center vcenter">Content</th>
+                                    <th class="col-md-2 text-center vcenter">Price (£)</th>
                                     <th class="col-md-2 text-center vcenter">Genre</th>
-                                    <th class="col-md-4 text-center vcenter">Image</th>
-                                    <th class="col-md-1">
-                                    </th>
+                                    <th class="col-md-3 text-center vcenter">Image</th>
+                                    <th></th>
                                 </tr>
                             </thead>
 
                             <tbody class="container-items tableForm">
                                 <tr class="controls" >
                                     <td>
-                                        <textarea class="form-control" rows="4" placeholder="Title (maximum 255 characters)" name="tit" id="title" required></textarea>
+                                        <textarea class="form-control" placeholder="Name (maximum 32 characters)" name="name" id="name" maxlength="32" required></textarea>
                                     </td>
                                     <td>
-                                        <textarea class="form-control" rows="4" placeholder="Description" name="con" required></textarea>
+                                        <textarea class="form-control" placeholder="Description" name="content" required></textarea>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="price" id="price" required>
                                     </td>
                                     <td class="vcenter">
                                         <div class="form-group">
                                             <select class="form-control" name="category" required>
                                                 <optgroup label="Select game type">
-                                                    <option value="" selected hidden>Genres</option>
+                                                    <option value="0" selected hidden>Genres</option>
                                                     <%
                                                         CategoryDAO categoryDAO = new CategoryDAO();
                                                         List<Category> listCategory = (ArrayList<Category>) categoryDAO.getCategory();
@@ -102,10 +133,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <textarea class="form-control" rows="4" placeholder="Name of image in /img/news/" name="image" required></textarea>
+                                        <input type="file" class="form-control" name="image" required>
                                     </td>
                                     <td class="text-center vcenter">
-                                        <button type="success" class="btn btn-success btn-xs" name="action" value="addnews" id="submit">
+                                        <button type="success" class="btn btn-success btn-xs" name="action" value="addproduct" id="submit">
                                             <i id="btn_i" class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                         <button type="reset" class="btn btn-danger btn-xs">
@@ -122,44 +153,66 @@
         </section>
 
 
-        <!--Show News-->
+        <!--Show Products-->
         <%
-            NewsDAO connector = new NewsDAO();
-            List<News> listOfNews = connector.getAllNews();
+            ProductDAO productDAO = new ProductDAO();
+            int pages = 1, firstResult, maxResult, total;
+            if (request.getParameter("pages") != null) {
+                pages = (Integer) Integer.parseInt(request.getParameter("pages"));
+            }
+            total = productDAO.countProduct();
+
+            if (total <= 6) {
+                firstResult = 1;
+                maxResult = total;
+            } else {
+                firstResult = (pages - 1) * 6;
+                maxResult = 6;
+            }
+
+            List<Product> listOfProduct = productDAO.getAllProducts(firstResult, maxResult);
         %>
-        <!-- News
+
+        <!-- Products
           ================================================== -->
         <section class="service-sec">
             <div class="container">
                 <div class="row">
 
-                    <!--Start loop to show news-->
+                    <!--Start loop to show products-->
                     <%
-                        for (News n : listOfNews) {
-                            String content = n.getContent();
-                            if (content.contains("<br>")) {
-                                String[] temp = content.split("<br>");
-                                content = temp[0] + " ...";
-                            }
+                        if (listOfProduct.size() > 0) {
+                            for (Product p : listOfProduct) {
                     %>
 
                     <div class="col-md-4 blog-box" data-aos="fade-down">
-                        <h3 class="blog-title"><a href="/news?viewnews=<%=n.getId()%>&action=details"><%=n.getTitle()%></a></h3>
-                        <div class="blog-image-block"> <img src="<%=n.getImage()%>" alt="" class="img-fluid"> </div>
-                        <p class="blog-content"><%=content%></p>
+                        <h3 class="blog-title"><a href="store?action=view&productID=<%=p.getPid()%>"><%=p.getName()%></a></h3>
+                        <div class="blog-image-block"> <img src="img/products/<%=p.getImage()%>" alt="" class="img-fluid"> </div>
+                        <p class="blog-content info"><%=p.getContent()%></p>
+                        <p class="blog-content price">£<%=p.getPrice()%></p>
                         <p class="blog-content">
-                        <form action="news" method="GET">
-                            <input type="hidden" name="viewnews" value="<%=n.getId()%>">
-                            <button type="submit" class="btn btn-info" name="action" value="details">Read more</button>
-                        </form>
+                            <a class="btn btn-info col-sm-3 col-md-5 float-left" href="store?action=view&productID=<%=p.getPid()%>">Read more</a>
+                            <a class="btn btn-danger col-sm-3 col-md-5 float-right" href="store?action=delete&productID=<%=p.getPid()%>">Remove <i id="btn_i" class="fa fa-trash" aria-hidden="true"></i></a>
+                        </p>
                     </div>
-                    <% }%>
+                    <% }
+                        }%>
                     <!--End loop-->
 
                 </div>
                 <!-- /.row -->
             </div>
 
+            <div class="container">
+                <div class="row">
+                    <ul class="pagination">
+                        <%for (int i = 1;
+                                    i <= (total / 6) + 1; i++) {%>
+                        <li class="arrow"><a href="/editProduct.jsp?pages=<%=i%>"><%=i%></a></li>
+                            <%}%>
+                    </ul>
+                </div>
+            </div>
         </section>
 
         <!-- Footer

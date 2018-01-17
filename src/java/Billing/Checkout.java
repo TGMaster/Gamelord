@@ -46,7 +46,7 @@ public class Checkout extends HttpServlet {
         } else {
             String message = "";
             String error = "";
-            
+
             // Set time
             Calendar calendar = Calendar.getInstance();
             java.sql.Timestamp date = new java.sql.Timestamp(calendar.getTime().getTime());
@@ -60,46 +60,63 @@ public class Checkout extends HttpServlet {
             String payment = request.getParameter("payment");
             String username = request.getParameter("username");
 
-            // Email time
-            Date dNow = new Date();
-            SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy 'at' hh:mm:ss a");
-
-            // Bill
-            BillDAO billDAO = new BillDAO();
-            BillDetailDAO bdDAO = new BillDetailDAO();
-            Bill b = new Bill();
-            b.setId(dNow.getTime());
-            b.setUid(u.getID());
-            b.setDate(date);
-            b.setPayment(payment);
-            b.setAddress(u.getAddress());
-            b.setTotal(cart.totalCart());
-            billDAO.insert(b);
-
-            // Send email
-            String text = "<p><strong>Purchase Detail</strong></p>"
-                    + "<p>Purchase Date: <i>" + ft.format(dNow) + "</i></p>"
-                    + "<p>Customer Name: <strong>" + username + "</strong></p>"
-                    + "<p>Payment Method: <i>" + payment + "</i></p>"
-                    + "<p>Items: </p><ul>";
-
-            for (Map.Entry<Integer, Item> list : cart.getCartItems().entrySet()) {
-                Product p = list.getValue().getProduct();
-                bdDAO.insert(new BillDetail(0, dNow.getTime(), p.getPid(), p.getPrice(), list.getValue().getQuantity()));
-                text += "<li>" + p.getName() + ": £" + p.getPrice() + " - Key: <strong>" + p.getKey() + "</strong></li>";
+            if (payment.equals("") || username.equals("")) {
+                error += "Please do not try to remove attribute";
             }
 
-            text += "</ul><p>Total: <strong>£" + cart.totalCart() + "</strong></p>"
-                    + "<p>Sold by: <strong>GameLord Company</strong></p>";
+            if (error.length() > 0) {
+                request.setAttribute("error", error);
+                rd = sc.getRequestDispatcher("");
+                rd.forward(request, response);
+            } else {
 
-            // Mail
-            Mail mail = new Mail(u.getEmail(), service, text, subject, mailserver);
-            MailController sm = new MailController();
-            if (sm.sendMail(mail)) {
-                message = "Thanks for your purchasing";
-                cart = new Cart();
-                session.setAttribute("cart", cart);
+                // Email time
+                Date dNow = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy 'at' hh:mm:ss a");
+
+                // Bill
+                BillDAO billDAO = new BillDAO();
+                BillDetailDAO bdDAO = new BillDetailDAO();
+                Bill b = new Bill();
+                b.setId(dNow.getTime());
+                b.setUid(u.getID());
+                b.setDate(sdf.format(date));
+                b.setPayment(payment);
+                b.setAddress(u.getAddress());
+                b.setTotal(cart.totalCart());
+                billDAO.insert(b);
+
+                // Send email
+                String text = "<p><strong>Purchase Detail</strong></p>"
+                        + "<p>Purchase Date: <i>" + ft.format(dNow) + "</i></p>"
+                        + "<p>Customer Name: <strong>" + username + "</strong></p>"
+                        + "<p>Payment Method: <i>" + payment + "</i></p>"
+                        + "<p>Items: </p><ul>";
+
+                for (Map.Entry<Integer, Item> list : cart.getCartItems().entrySet()) {
+                    Product p = list.getValue().getProduct();
+                    bdDAO.insert(new BillDetail(0, dNow.getTime(), p.getPid(), p.getPrice(), list.getValue().getQuantity()));
+                    text += "<li>" + p.getName() + ": £" + p.getPrice() + " - Key: <strong>" + p.getKey() + "</strong></li>";
+                }
+
+                text += "</ul><p>Total: <strong>£" + cart.totalCart() + "</strong></p>"
+                        + "<p>Sold by: <strong>GameLord Company</strong></p>";
+
+                // Mail
+                Mail mail = new Mail(u.getEmail(), service, text, subject, mailserver);
+                MailController sm = new MailController();
+                if (sm.sendMail(mail)) {
+                    message += "Thanks for your purchasing";
+                    cart = new Cart();
+                    session.setAttribute("cart", cart);
+                }
+                
+                request.setAttribute("message", message);
+                rd = sc.getRequestDispatcher("/store");
+                rd.forward(request, response);
             }
+
         }
 
     }
